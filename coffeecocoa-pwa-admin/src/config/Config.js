@@ -1,4 +1,16 @@
-import * as firebase from 'firebase';
+//import firebase from 'firebase/compat/app';
+
+import firebase from 'firebase/app';
+//import firebase from '@firebase/app';
+//require('firebase/auth');
+
+//import * as firebase from 'firebase';
+
+//import 'firebase/compat/firestore';
+//import 'firebase/compat/storage';
+
+import 'firebase/auth';
+
 import 'firebase/firestore';
 import 'firebase/storage';
 
@@ -21,7 +33,7 @@ const firebaseConfig = {
 };
 
 
-firebase.initializeApp(firbaseConfig);
+firebase.initializeApp(firebaseConfig);
 
 const auth = firebase.auth();
 const db = firebase.firestore();

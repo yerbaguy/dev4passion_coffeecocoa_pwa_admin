@@ -4,7 +4,14 @@ import {Home} from './components/Home'
 import {AddProducts} from './components/AddProducts'
 import { Link, Route, BrowserRouter as Router, Routes} from 'react-router-dom';;
 
+//const { initializeApp } = require('firebase-admin/app');
+
 export class App extends Component {
+
+
+
+
+
 
        render() {
          return (

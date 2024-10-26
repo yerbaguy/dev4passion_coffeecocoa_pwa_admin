@@ -1,27 +1,25 @@
 import React, { useState, useEffect } from 'react';
 //import { storage, db } from '../config/Config';
-import Swal from 'sweetalert2';
 import { collection, getDocs, addDoc } from "firebase/firestore";
 import { db } from '../config/firestore';
 
 
-export const AddProducts = ({setIsAdding}) => {
+export const AddProducts = () => {
 
 
-        const [employees, setEmployees] = useState([]); 
+
 	const [firstName, setFirstName] = useState();
 	const [lastName, setLastName] = useState();
 	const [email, setEmail] = useState();
 	const [salary, setSalary] = useState();
 	const [date, setDate] = useState();
 
-	//const [employees, setEmployees] = useState();
+	const [employees, setEmployees] = useState();
 
 	const [productName, setProductName] = useState('');
     const [productPrice, setProductPrice] = useState(0);
     const [productImg, setProductImg] = useState(null);
     const [error, setError] = useState('');
-
 
 	const types = ['image/png', 'image/jpeg']; // image types
 	
@@ -53,17 +51,13 @@ export const AddProducts = ({setIsAdding}) => {
 	};
 
 
-		console.log(newEmployee);
 
 	employees.push(newEmployee);
 
 	try {
-		
 		await addDoc(collection(db, "employees"), {
 
 		...newEmployee
-		//firstName: "eeeee",
-		//lastNam: "fffff",
 		});
 	} catch(error) {
 
@@ -152,63 +146,6 @@ useEffect(() => {
 		<br/>
 		<h2>Add Products</h2>
 		<br/>
-
-		<form onSubmit={handleAdd}>
-        <h1>Add Employee</h1>
-        <label htmlFor="firstName">First Name</label>
-        <input
-          id="firstName"
-          type="text"
-          name="firstName"
-          value={firstName}
-          onChange={e => setFirstName(e.target.value)}
-        />
-        <label htmlFor="lastName">Last Name</label>
-        <input
-          id="lastName"
-          type="text"
-          name="lastName"
-          value={lastName}
-          onChange={e => setLastName(e.target.value)}
-        />
-        <label htmlFor="email">Email</label>
-        <input
-          id="email"
-          type="email"
-          name="email"
-          value={email}
-          onChange={e => setEmail(e.target.value)}
-        />
-        <label htmlFor="salary">Salary ($)</label>
-        <input
-          id="salary"
-          type="number"
-          name="salary"
-          value={salary}
-          onChange={e => setSalary(e.target.value)}
-        />
-        <label htmlFor="date">Date</label>
-        <input
-          id="date"
-          type="date"
-          name="date"
-          value={date}
-          onChange={e => setDate(e.target.value)}
-        />
-        <div style={{ marginTop: '30px' }}>
-          <input type="submit" value="Add" />
-          <input
-            style={{ marginLeft: '12px' }}
-            className="muted-button"
-            type="button"
-            value="Cancel"
-            onClick={() => setIsAdding(false)}
-          />
-        </div>
-      </form>
-
-
-
 
 		</div>
 
