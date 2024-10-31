@@ -2,8 +2,6 @@
 import { initializeApp } from "firebase/app";
 //import { getAnalytics } from "firebase/analytics";
 import { getFirestore } from "firebase/firestore";
-//import { getStorage, ref } from "firebase/storage";
-import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -26,19 +24,5 @@ const app = initializeApp(firebaseConfig);
 
 const db = getFirestore(app);
 
-//const storage = getStorage(); here
-const storage = getStorage(app);
-
-//const storageRef = ref(storage);
-
-const imageRef = ref(storage, '/Users/bartosz/Downloads/bg.jpeg');
-
-
-
 //export { db, getFirestore }
-//export { db } was here
-
-//export { db, storage, storageRef }
-//export { db } //here
-export { db, storage, ref }
-//export { db, getStorage, ref, uploadBytesResumable, getDownloadURL }
+export { db }
