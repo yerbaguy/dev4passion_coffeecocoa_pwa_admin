@@ -40,5 +40,5 @@ const imageRef = ref(storage, '/Users/bartosz/Downloads/bg.jpeg');
 
 //export { db, storage, storageRef }
 //export { db } //here
-export { db, storage, ref }
+export { db, storage, ref, getDownloadURL }
 //export { db, getStorage, ref, uploadBytesResumable, getDownloadURL }

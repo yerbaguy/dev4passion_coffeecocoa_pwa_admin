@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import Swal from 'sweetalert2';
 import { collection, getDocs, addDoc } from "firebase/firestore";
 import { db } from '../config/firestore';
+import { data } from '@remix-run/router';
 
 
 export const AddProducts = ({setIsAdding}) => {
@@ -100,12 +101,14 @@ export const AddProducts = ({setIsAdding}) => {
 	
 		const querySnapshot = await getDocs(collection(db, "employees"));
 
-		querySnapshot.forEach((doc) => {
+    const employees = querySnapshot.docs.map( doc => ({id: doc.id, ...doc.data()}))
+
+		// querySnapshot.forEach((doc) => {
 
 
-			console.log(doc.id, "=>", doc.data());
+		// 	console.log(doc.id, "=>", doc.data());
 
-		});
+		// });
 
 		setEmployees(employees)
 
@@ -210,9 +213,104 @@ useEffect(() => {
 
 
 
+       ////here/////
+
+
+
+      <div className="contain-table">
+        <table className="striped-table">
+          <thead>
+            <tr>
+              <th>Id</th>
+              <th>First Name</th>
+              <th>Last Name</th>
+              <th>Email</th>
+              <th>Salary</th>
+              <th>Date</th>
+              <th colSpan={2} className="text-center">
+                Actions
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {employees ? (
+              employees.map((employee, i) => (
+                <tr key={employee.id}>
+                  <td>{employee.id}</td>
+                  <td>{employee.firstName}</td>
+                  <td>{employee.lastName}</td>
+                  <td>{employee.email}</td>
+                  {/* <td>{formatter.format(employee.salary)}</td> */}
+                  <td>{employee.salary}</td>
+                  <td>{employee.date} </td>
+                  <td className="text-right">
+                    <button
+                      // onClick={() => handleEdit(employee.id)}
+                      // className="button muted-button"
+                    >
+                      Edit
+                    </button>
+                  </td>
+                  <td className="text-left">
+                    <button
+                      // onClick={() => handleDelete(employee.id)}
+                      // className="button muted-button"
+                    >
+                      Delete
+                    </button>
+                  </td>
+                </tr>
+              ))
+            ) : (
+              <tr>
+                <td colSpan={7}></td>
+              </tr>
+            )}
+          </tbody>
+        </table>
+      </div>
+
+
+       /////here////
+
+
+
+
+
+
+
+
 		</div>
 
-	)
+
+
+  
+
+
+
+
+
+
+   
+
+
+  ////here
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+)
 		//<form autoComplete="off" className='form-group'>
 		// <label htmlFor="product-name">Product Name</label>
 		// <input type="text" className='form-control' required
