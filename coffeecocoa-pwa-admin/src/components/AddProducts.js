@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 //import { storage, db } from '../config/Config';
 import Swal from 'sweetalert2';
-import { collection, getDocs, addDoc } from "firebase/firestore";
+import { collection, getDocs, addDoc, doc, deleteDoc } from "firebase/firestore";
 import { db } from '../config/firestore';
 import { data } from '@remix-run/router';
 
@@ -120,6 +120,38 @@ useEffect(() => {
 
 	getEmployees()
 }, [])
+
+
+
+  const handleDelete = id => {
+    Swal.fire({
+      icon: 'warning',
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      showCancelButton: true,
+      confirmButtonText: 'Yes, delete it!',
+      cancelButtonText: 'No, cancel!',
+    }).then(result => {
+      if (result.value) {
+        const [employee] = employees.filter(employee => employee.id === id);
+
+        deleteDoc(doc(db, "employees", id));
+
+        Swal.fire({
+          icon: 'success',
+          title: 'Deleted!',
+          text: `${employee.firstName} ${employee.lastName}'s data has been deleted.`,
+          showConfirmButton: false,
+          timer: 1500,
+        });
+
+        const employeesCopy = employees.filter(employee => employee.id !== id);
+        setEmployees(employeesCopy);
+      }
+    });
+  };
+
+
 
 
 //	const addProduct = (e) => {
@@ -253,8 +285,8 @@ useEffect(() => {
                   </td>
                   <td className="text-left">
                     <button
-                      // onClick={() => handleDelete(employee.id)}
-                      // className="button muted-button"
+                      onClick={() => handleDelete(employee.id)}
+                      className="button muted-button"
                     >
                       Delete
                     </button>
